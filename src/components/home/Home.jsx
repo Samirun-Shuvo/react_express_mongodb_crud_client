@@ -7,7 +7,7 @@ const Home = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:5000/user");
+        const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/user`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -24,7 +24,7 @@ const Home = () => {
   const handleUserDelete = (id) => {
     const proceed = window.confirm("Are you sure you want to delete?");
     if (proceed) {
-      fetch(`http://localhost:5000/user/${id}`, { method: "DELETE" })
+      fetch(`${import.meta.env.VITE_APP_API_URL}/user/${id}`, { method: "DELETE" })
         .then((response) => {
           if (!response.ok) {
             throw new Error(

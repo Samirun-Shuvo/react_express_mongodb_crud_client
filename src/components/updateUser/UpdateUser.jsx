@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateUser = () => {
-  const [user, setUser] = useState({}); // Initialize user state with empty name and email
+  const [user, setUser] = useState({ name: '', email: '' }); // Initialize user state with empty name and email
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/user/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/user/${id}`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -30,7 +30,7 @@ const UpdateUser = () => {
     const updatedUser = { name, email };
 
     try {
-      const response = await fetch(`http://localhost:5000/user/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/user/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedUser),
